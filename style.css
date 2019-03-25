@@ -1,0 +1,20 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat';
+}
+
+h1{
+  background: red;
+  color: black;
+  margin-bottom: 15px;
+}
+#button{
+  width: 100px;
+
+}
+
+li{
+  margin-bottom: 15px;
+}
