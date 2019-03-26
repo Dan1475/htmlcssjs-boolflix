@@ -109,7 +109,7 @@ function ajaxMovieSuccess(data){
   }
   else {
 
-    var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
+    var locandina = 'https://image.tmdb.org/t/p/w300/' + result.poster_path;
   }
   var overview = result.overview;
 
@@ -132,7 +132,7 @@ function ajaxSuccessSeries(data){
   }
   else {
 
-    var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
+    var locandina = 'https://image.tmdb.org/t/p/w300/' + result.poster_path;
   }
 
   var overview = result.overview;
