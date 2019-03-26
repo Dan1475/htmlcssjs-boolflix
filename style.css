@@ -75,6 +75,7 @@
   text-align: center;
   line-height: 25px;
   background: black;
+  overflow-y: auto;
 
 }
 .flex{

@@ -24,13 +24,14 @@ function ajaxMovieCall(input){
   })
 }
 
-function updateMovieUI(title, original, flag, voto, locandina){
+function updateMovieUI(title, original, flag, voto, locandina, overview){
 
   var tempData = {
     locandina: locandina,
     title: title,
     original: original,
-    flag: flag
+    flag: flag,
+    overview: overview,
   }
 
   var template = $('#box-template').html();
@@ -71,13 +72,14 @@ function ajaxSeriesCall(input){
     })
 }
 
-function updateSeriesUI(title, original, flag, voto, locandina){
+function updateSeriesUI(title, original, flag, voto, locandina, overview){
 
   var tempData = {
     locandina: locandina,
     title: title,
     original: original,
-    flag: flag
+    flag: flag,
+    overview: overview,
 
   }
 
@@ -109,9 +111,9 @@ function ajaxMovieSuccess(data){
 
     var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
   }
+  var overview = result.overview;
 
-
-  updateMovieUI(title, original, flag, voto, locandina);
+  updateMovieUI(title, original, flag, voto, locandina, overview);
   }
 }
 
@@ -133,8 +135,8 @@ function ajaxSuccessSeries(data){
     var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
   }
 
-
-  updateSeriesUI(title, original, flag, voto, locandina);
+  var overview = result.overview;
+  updateSeriesUI(title, original, flag, voto, locandina, overview);
 
   }
 }
