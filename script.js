@@ -1,5 +1,30 @@
+function ajaxMovieCall(input){
 
-function addTitle(title, original, flag, voto, locandina){
+  var data = {
+
+    api_key: '11361ae336b51f58679851b46306e28c',
+    language: 'it-IT',
+    query: input
+  };
+
+  $.ajax({
+
+    url: 'https://api.themoviedb.org/3/search/movie',
+    method: 'GET',
+    data: data,
+    success: function(data, state){
+      ajaxMovieSuccess(data);
+
+
+    },
+    error: function(request, state, error){
+      console.log('error');
+    }
+
+  })
+}
+
+function updateMovieUI(title, original, flag, voto, locandina){
 
   var tempData = {
     locandina: locandina,
@@ -12,38 +37,63 @@ function addTitle(title, original, flag, voto, locandina){
   var compiled = Handlebars.compile(template);
   var finalHTML = compiled(tempData);
 
-  var ulFilms = $('.result');
-  ulFilms.append(finalHTML);
+  var movieBox = $('.movie-box');
+  movieBox.append(finalHTML);
+   // $('.info').hide();
+   hoverImage();
   addStar(voto);
 }
 
-function ajaxCall(title){
 
-  var data = {
+function ajaxSeriesCall(input){
 
-    api_key: '11361ae336b51f58679851b46306e28c',
-    language: 'it-IT',
-    query: title
-  };
+    var data = {
 
-  $.ajax({
+      api_key: '11361ae336b51f58679851b46306e28c',
+      language: 'it-IT',
+      query: input
+    };
 
-    url: 'https://api.themoviedb.org/3/search/movie',
-    method: 'GET',
-    data: data,
-    success: function(data, state){
-      console.log(data);
-      ajaxSuccess(data);
+    $.ajax({
 
-    },
-    error: function(request, state, error){
-      console.log('error');
-    }
+      url: 'https://api.themoviedb.org/3/search/tv',
+      method: 'GET',
+      data: data,
+      success: function(data, state){
+        ajaxSuccessSeries(data);
 
-  })
+
+      },
+      error: function(request, state, error){
+        console.log('error');
+      }
+
+    })
 }
 
-function ajaxSuccess(data){
+function updateSeriesUI(title, original, flag, voto, locandina){
+
+  var tempData = {
+    locandina: locandina,
+    title: title,
+    original: original,
+    flag: flag
+
+  }
+
+  var template = $('#box-template').html();
+  var compiled = Handlebars.compile(template);
+  var finalHTML = compiled(tempData);
+
+  var seriesBox = $('.series-box');
+  seriesBox.append(finalHTML);
+  hoverImage();
+  addStar(voto);
+
+}
+
+
+function ajaxMovieSuccess(data){
   var res = data.results;
 
   for (var i = 0; i < res.length; i++) {
@@ -52,39 +102,20 @@ function ajaxSuccess(data){
   var original = result.original_title;
   var flag = getFlag(result.original_language);
   var voto = Math.round(result.vote_average / 2);
-  var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
+  if (result.poster_path == null) {
+    var locandina = "https://www.xmple.com/wallpaper/3d-cubes-yellow-white-black-1536x2048-c3-ffd700-f5fffa-000000-l-278-a-135-f-11.svg"
+  }
+  else {
 
-  console.log(voto);
+    var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
+  }
 
-  addTitle(title, original, flag, voto, locandina);
+
+  updateMovieUI(title, original, flag, voto, locandina);
   }
 }
 
-function ajaxSeries(title){
 
-  var data = {
-
-    api_key: '11361ae336b51f58679851b46306e28c',
-    language: 'it-IT',
-    query: title
-  };
-
-  $.ajax({
-
-    url: 'https://api.themoviedb.org/3/search/tv',
-    method: 'GET',
-    data: data,
-    success: function(data, state){
-      console.log(data);
-      ajaxSuccessSeries(data);
-
-    },
-    error: function(request, state, error){
-      console.log('error');
-    }
-
-  })
-}
 function ajaxSuccessSeries(data){
   var res = data.results;
 
@@ -94,37 +125,19 @@ function ajaxSuccessSeries(data){
   var original = result.original_name;
   var flag = getFlag(result.original_language);
   var voto = Math.round(result.vote_average / 2);
-  var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
-
-
-  console.log(voto);
-
-  addTitleSeries(title, original, flag, voto, locandina);
+  if (result.poster_path == null) {
+    var locandina = "https://imgc.allpostersimages.com/img/print/u-g-F5M8DF0.jpg?w=550&h=550&p=0"
   }
-}
+  else {
 
-function addTitleSeries(title, original, flag, voto, locandina){
-
-
-  var tempData = {
-    locandina: locandina,
-    title: title,
-    original: original,
-    flag: flag
-
+    var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
   }
 
 
-  var template = $('#box-template').html();
-  var compiled = Handlebars.compile(template);
-  var finalHTML = compiled(tempData);
+  updateSeriesUI(title, original, flag, voto, locandina);
 
-  var res = $('.series');
-  res.append(finalHTML);
-  addStar(voto);
+  }
 }
-
-
 
 function addStar(voto){
  var filledStar = "<i class='fas fa-star'></i>";
@@ -141,7 +154,6 @@ function addStar(voto){
 
   }
 }
-
 
 function getFlag(language){
  var url;
@@ -165,15 +177,38 @@ function getFlag(language){
 }
 
 
+function hoverImage(){
+ $('.box-movie').mouseenter(function(){
+
+   var me = $(this);
+   // me.css('background', 'black')
+   me.children('div').show();
+   console.log('ok');
+ })
+
+ $('.box-movie').mouseleave(function(){
+
+   var me = $(this);
+   // me.css('background', 'black')
+   me.children('div').hide();
+   console.log('ok');
+ })
+}
+
 function init(){
-$('#button').click(function(){
-  $('.films').remove();
-  var input = $('#query').val();
-  ajaxCall(input);
-  ajaxSeries(input);
-  $('#query').val('');
+ hoverImage();
+$('#btn').click(function(){
+
+ $('.box-movie').remove();
+ var input = $('#query').val();
+
+ ajaxMovieCall(input);
+ ajaxSeriesCall(input);
+   $('#query').val('');
 
 })
+
+
 
 }
 
