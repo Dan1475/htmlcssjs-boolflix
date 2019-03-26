@@ -1,7 +1,8 @@
 
-function addTitle(title, original, flag, voto){
+function addTitle(title, original, flag, voto, locandina){
 
   var tempData = {
+    locandina: locandina,
     title: title,
     original: original,
     flag: flag
@@ -42,6 +43,23 @@ function ajaxCall(title){
   })
 }
 
+function ajaxSuccess(data){
+  var res = data.results;
+
+  for (var i = 0; i < res.length; i++) {
+  var result = res[i];
+  var title = result.title;
+  var original = result.original_title;
+  var flag = getFlag(result.original_language);
+  var voto = Math.round(result.vote_average / 2);
+  var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
+
+  console.log(voto);
+
+  addTitle(title, original, flag, voto, locandina);
+  }
+}
+
 function ajaxSeries(title){
 
   var data = {
@@ -76,17 +94,20 @@ function ajaxSuccessSeries(data){
   var original = result.original_name;
   var flag = getFlag(result.original_language);
   var voto = Math.round(result.vote_average / 2);
+  var locandina = 'https://image.tmdb.org/t/p/w185/' + result.poster_path;
+
 
   console.log(voto);
 
-  addTitleSeries(title, original, flag, voto);
+  addTitleSeries(title, original, flag, voto, locandina);
   }
 }
 
-function addTitleSeries(title, original, flag, voto){
+function addTitleSeries(title, original, flag, voto, locandina){
 
 
   var tempData = {
+    locandina: locandina,
     title: title,
     original: original,
     flag: flag
@@ -103,21 +124,7 @@ function addTitleSeries(title, original, flag, voto){
   addStar(voto);
 }
 
-function ajaxSuccess(data){
-  var res = data.results;
 
-  for (var i = 0; i < res.length; i++) {
-  var result = res[i];
-  var title = result.title;
-  var original = result.original_title;
-  var flag = getFlag(result.original_language);
-  var voto = Math.round(result.vote_average / 2);
-
-  console.log(voto);
-
-  addTitle(title, original, flag, voto);
-  }
-}
 
 function addStar(voto){
  var filledStar = "<i class='fas fa-star'></i>";
