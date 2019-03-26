@@ -61,11 +61,17 @@
 }
 .box-movie{
   width: 300px;
-  height: 450px;
+  height: 440px;
   background-repeat: no-repeat;
-  margin: 15px;
+  margin: 25px;
   box-shadow: 5px 5px 15px black;
   color: white;
+  transition: transform .4s;
+
+}
+
+.box-movie:hover{
+   transform: scale(1.1);
 }
 .info{
   height: inherit;
@@ -77,13 +83,21 @@
   background: black;
   overflow-y: auto;
 
+
+}
+.info::-webkit-scrollbar {
+  display: none;
 }
 .flex{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content:
+  justify-content: center;
 }
 .over{
   font-size: 10px;
+}
+.titolo{
+  font-size: 30px;
+  margin-bottom: 15px;
 }

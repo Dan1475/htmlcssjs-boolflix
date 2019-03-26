@@ -40,9 +40,9 @@ function updateMovieUI(title, original, flag, voto, locandina, overview){
 
   var movieBox = $('.movie-box');
   movieBox.append(finalHTML);
-   // $('.info').hide();
+
    hoverImage();
-  addStar(voto);
+   addStar(voto);
 }
 
 
@@ -209,8 +209,6 @@ $('#btn').click(function(){
    $('#query').val('');
 
 })
-
-
 
 }
 
