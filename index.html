@@ -10,23 +10,40 @@
 
       <!-- ////template -->
       <script id="box-template" type="text/x-handlebars-template">
-       <li id= 'title'>{{title}} <br> {{original}} <br> {{lang}} <br> {{voto}}</li>
+        <div class="films">
 
+        <p class= 'res'>1. <b>TITOLO</b>: {{title}}</p>
+        <p class= 'res'>2. <b>TITOLO ORIGINALE</b>: {{original}}</p>
+        <p class= 'res lang'>3. <b>LINGUA</b>: <img class= "flag" src="{{flag}}" alt=""></p>
+        <p class= 'res star'>4. <b>RATING</b>: {{voto}}</p>
 
+      </div>
       </script>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <meta charset="utf-8">
-    <title></title>
+    <title>BOOLFLIX</title>
   </head>
   <body>
-   <h1>BOOLFLIX</h1>
-   <input id="query" type="text" name="" value="">
-   <input id="button" type="button" name="" value="CERCA">
+    <div class="container">
+     <div class="wrapper">
 
-   <div class="result">
-     <ul class="films">
+       <h1>BOOLFLIX</h1>
+       <input id="query" type="text" name="" value="" placeholder="Cerca un film...">
+       <input id="button" type="button" name="" value="CERCA">
 
-     </ul>
+     </div>
+     <div class="results-box">
+
+     <div class="result">
+       <h2>MOVIE</h2>
+
+     </div>
+     <div class="series">
+       <h2>TV-SERIES</h2>
+
+     </div>
+   </div>
+
    </div>
   </body>
 </html>
