@@ -16,7 +16,7 @@
 .nav{
   width: 100%;
   height: auto;
-  /* background: red; */
+
   color: red;
   display: flex;
   flex-direction: row;
@@ -100,4 +100,59 @@
 .titolo{
   font-size: 30px;
   margin-bottom: 15px;
+}
+
+#query{
+ width: 200px;
+ height: 25px;
+ margin-right: 5px;
+
+}
+#moreInfo{
+  width: 100px;
+  height: 50px;
+
+}
+
+
+.getCast{
+  width: 100px;
+  height: 50px;
+  z-index: 100;
+  background: black;
+  color: red;
+
+}
+.cast-container{
+  width: 80%;
+  height: 500px;
+  border-radius: 5px;
+  padding: 30px;
+  background: black;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  box-shadow: 5px 5px 15px black;
+
+
+}
+
+.cast-container i{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+
+.actor{
+  margin: 20px;
 }

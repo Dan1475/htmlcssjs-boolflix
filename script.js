@@ -24,7 +24,7 @@ function ajaxMovieCall(input){
   })
 }
 
-function updateMovieUI(title, original, flag, voto, locandina, overview){
+function updateMovieUI(title, original, flag, voto, locandina, overview,id){
 
   var tempData = {
     locandina: locandina,
@@ -32,6 +32,7 @@ function updateMovieUI(title, original, flag, voto, locandina, overview){
     original: original,
     flag: flag,
     overview: overview,
+    dataId: id
   }
 
   var template = $('#box-template').html();
@@ -72,7 +73,7 @@ function ajaxSeriesCall(input){
     })
 }
 
-function updateSeriesUI(title, original, flag, voto, locandina, overview){
+function updateSeriesUI(title, original, flag, voto, locandina, overview,id){
 
   var tempData = {
     locandina: locandina,
@@ -80,6 +81,8 @@ function updateSeriesUI(title, original, flag, voto, locandina, overview){
     original: original,
     flag: flag,
     overview: overview,
+    dataId: id
+
 
   }
 
@@ -112,8 +115,9 @@ function ajaxMovieSuccess(data){
     var locandina = 'https://image.tmdb.org/t/p/w300/' + result.poster_path;
   }
   var overview = result.overview;
+  var id = result.id;
 
-  updateMovieUI(title, original, flag, voto, locandina, overview);
+  updateMovieUI(title, original, flag, voto, locandina, overview,id);
   }
 }
 
@@ -136,10 +140,44 @@ function ajaxSuccessSeries(data){
   }
 
   var overview = result.overview;
-  updateSeriesUI(title, original, flag, voto, locandina, overview);
+  var id = result.id;
+  updateSeriesUI(title, original, flag, voto, locandina, overview,id);
 
   }
 }
+
+function castSuccess(data){
+  var actors = data.cast;
+  for (var i = 0; i < 5; i++) {
+    var actor = actors[i];
+    var name = actor.name;
+    console.log(name);
+
+    var picture = 'https://image.tmdb.org/t/p/w185/' + actor.profile_path;
+    console.log(picture);
+
+
+    updateCast(name, picture);
+  }
+}
+
+function updateCast(name, picture){
+
+  var castData = {
+   name: name,
+   profile: picture
+
+  }
+
+  var template = $('#cast-template').html();
+  var compiled = Handlebars.compile(template);
+  var finalHTML = compiled(castData);
+
+  var castBox = $('.cast-container');
+  castBox.append(finalHTML);
+
+}
+
 
 function addStar(voto){
  var filledStar = "<i class='fas fa-star'></i>";
@@ -185,7 +223,7 @@ function hoverImage(){
    var me = $(this);
    // me.css('background', 'black')
    me.children('div').show();
-   console.log('ok');
+
  })
 
  $('.box-movie').mouseleave(function(){
@@ -193,22 +231,87 @@ function hoverImage(){
    var me = $(this);
    // me.css('background', 'black')
    me.children('div').hide();
-   console.log('ok');
+
  })
 }
 
+
+function getCast(id){
+
+  var data = {
+
+    api_key: '11361ae336b51f58679851b46306e28c',
+    language: 'it-IT',
+
+  };
+
+  $.ajax({
+
+    url: 'https://api.themoviedb.org/3/movie/' + id + '/credits',
+    method: 'GET',
+    data: data,
+    success: function(data, state){
+      castSuccess(data)
+    console.log(data.cast);
+
+
+    },
+    error: function(request, state, error){
+      castError(data);
+    }
+
+  })
+}
+
+function castError(data){
+
+  var castData = {
+   titolo: 'Non sono disponibili informazioni sul cast'
+
+  }
+  var template = $('#cast-template').html();
+  var compiled = Handlebars.compile(template);
+  var finalHTML = compiled(castData);
+
+  var castBox = $('.cast-container');
+  castBox.append(finalHTML);
+}
+function textEnterEvent(e){
+  if (e.which == 13) {
+    $('.box-movie').remove();
+    var input = $('#query').val();
+
+    ajaxMovieCall(input);
+    ajaxSeriesCall(input);
+      $('#query').val('');
+  }
+}
+
+
 function init(){
  hoverImage();
-$('#btn').click(function(){
 
- $('.box-movie').remove();
- var input = $('#query').val();
+ var text = $('#query');
+  text.keyup(textEnterEvent);
+    $('.cast-container').hide();
+  $(document).on('click', '.getCast', function(){
+      // $('.cast').children().html('');
+      $('.cast').remove();
+    var me = $(this);
 
- ajaxMovieCall(input);
- ajaxSeriesCall(input);
-   $('#query').val('');
+    var id = me.attr('data-id');
+    console.log(id);
+    getCast(id);
 
-})
+
+    $('.cast-container').show();
+
+  })
+
+ $(document.body).on('click', function(){
+   $('.cast-container').hide();
+   $('.cast').children().html('');
+ });
 
 }
 

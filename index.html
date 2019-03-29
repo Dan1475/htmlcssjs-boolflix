@@ -17,8 +17,22 @@
            <p class= 'res'> <b>TITOLO ORIGINALE</b>:<br> {{original}}</p>
            <p class= 'res lang'><b>LINGUA</b>: <img class= "flag" src="{{flag}}" alt=""></p>
            <p class= 'res star'> {{voto}}</p>
-
            <p class= 'res over'>"{{overview}}"</p>
+           <input class="getCast" type="button" data-id="{{dataId}}"  value= 'CAST' >
+
+
+         </div>
+       </div>
+      </script>
+
+      <script id="cast-template" type="text/x-handlebars-template">
+       <div class= "cast" >
+         <h2>{{titolo}}</h2>
+         <div class="actor">
+           <img class= "profile" src="{{profile}}" alt="">
+           <p class= 'name'> {{name}}</p>
+
+
 
          </div>
        </div>
@@ -31,12 +45,16 @@
      <div class="nav">
        <h1><b>BOOLFLIX</b></h1>
        <div class="input">
-         <input id="query" type="text" placeholder="Digita qui... ">
-         <input id="btn" type="button" name="" value="CERCA">
+         <input id="query" type="text" placeholder="Digita qui... " >
+         <i class="fas fa-search"></i>
+         <!-- <input id="btn" type="button" name="" value="CERCA"> -->
        </div>
 
      </div>
      <div class="main">
+       <div class="cast-container">
+        <i class="far fa-times-circle exit"></i>
+       </div>
        <div class="movie">
          <h2 class="align">MOVIES</h2>
          <div class="movie-box flex">
@@ -52,6 +70,7 @@
 
        </div>
      </div>
+
    </div>
   </body>
 </html>
