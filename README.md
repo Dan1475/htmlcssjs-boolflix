@@ -3,16 +3,12 @@
 <h1>Movies and Tv Series search Website</h1>
 
 <p>This project is proposed as the homepage of a website for movies and tv series search.</br></br>
-<p> 
+<p>Using the search bar and entering the name, or part of the name, of a movie or TV series,  all the related results will be shown divided into two columns</p>.
 
   <img src="boolflix-gif.gif" alt="boolflix1">
   
-  <p>Moreover, hovering</p></br>
+  <p>Hovering each card, are shown details of the movie or tv series, including: languge, rating and plot.</p></br>
+  <p> Moreover, scrolling at the bottom of the card, a tab will be open showing photos and names of the main actors.</p>
+  
  <img src="boolflix2-gif.gif" alt="boolflix2">
 
-
-
-
-Moving the mouse on each tab, the details of the movie or TV series are displayed, including: language, rating, plot.
-
-At the bottom of the tab, clicking on the CAST button will open a tab with a list of the main players.
