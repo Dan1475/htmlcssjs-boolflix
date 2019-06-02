@@ -1,6 +1,6 @@
 # BOOLFLIX
 
-<h1>Movies and Tv Serie search Website</h1>
+<h1>Movies and Tv Series search Website</h1>
 
 <p>This project is proposed as the homepage of a website for movies and tv series search.</br></br>
 
