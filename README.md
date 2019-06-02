@@ -7,7 +7,7 @@
 
   <img src="boolflix-gif.gif" alt="boolflix1">
   
-  <p>Hovering each card, details of the movie or tv series are shown, including: languge, rating and plot.</p></br>
+  <p>Hovering each card, details of the movie or tv series are shown, including: language, rating and plot.</p></br>
   <p> Moreover, scrolling at the bottom of the card and clicking on the CAST button, a tab will be open showing photos and names of the main actors.</p>
   
  <img src="boolflix2-gif.gif" alt="boolflix2">
